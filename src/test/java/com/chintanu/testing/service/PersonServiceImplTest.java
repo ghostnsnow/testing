@@ -8,6 +8,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+
 @ExtendWith(MockitoExtension.class)
 class PersonServiceImplTest {
 
@@ -38,9 +41,21 @@ class PersonServiceImplTest {
     void testGetSquare() {
 
         Mockito.when(repository.getSquare(ArgumentMatchers.anyInt())).thenReturn(121);
-        int ret = service.getSquare(11);
+        int ret = service.getSquare(anyInt());
         System.out.println(ret);
         Mockito.verify(repository, Mockito.times(1)).getSquare(ArgumentMatchers.anyInt());
+        Assertions.assertEquals(121, ret);
+    }
+
+    @Test
+    void testGetSquareCaptor() {
+
+        ArgumentCaptor<Integer> squareCaptor = ArgumentCaptor.forClass(Integer.class);
+        Mockito.when(repository.getSquare(squareCaptor.capture())).thenReturn(121);
+        int ret = service.getSquare(11);
+        System.out.println(ret);
+        Mockito.verify(repository, Mockito.times(1)).getSquare(anyInt());
+        Assertions.assertEquals(11, squareCaptor.getValue());
         Assertions.assertEquals(121, ret);
     }
 
