@@ -5,8 +5,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Component
-//@Primary
-@Profile("laurel")
+@Primary
+//@Profile("laurel")
 public class LaurelWordProducer implements WordProducer{
     
     @Override

@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Component
-@Profile("yanny")
+//@Profile("yanny")
 //@Primary
 public class YannyWordProducer implements WordProducer{
 
